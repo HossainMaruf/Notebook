@@ -1,20 +1,29 @@
 const express = require('express');
+const ejs = require('ejs');
+const path = require('path');
+// creating the app
 const app = express();
 
+
+// Set the views directory
+app.set('views', './views');
+// set the view engine
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
-  res.send('<h1>DONE</h1>');
+  res.render('Home');
 })
 app.get('/about', (req, res) => {
-  res.send('About Page');
+  res.sendFile(path.join(__dirname, 'views', 'About.html'));
 })
 app.get('/contact', (req, res) => {
-  res.send('Contact Page');
+  res.sendFile(path.join(__dirname, 'views', 'Contact.html'));
 })
 app.get('/dashboard', (req, res) => {
-  res.send('Dashboard Page');
+  res.sendFile(path.join(__dirname, 'views', 'Dashboard.html'));
 })
 app.get('*', (req, res) => {
-  res.send('404 Page');
+  res.sendFile(path.join(__dirname, 'views', '404.html'));
 })
 
 const port = process.env.PORT || 3000;
