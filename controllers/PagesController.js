@@ -33,6 +33,22 @@ router.get('/dashboard', (req, res) => {
   res.render('pages/Dashboard', {...data});
 })
 
+// SIGN UP
+router.get('/signup', (req, res) => {
+  const data = {
+    title: "Sign Up"
+  }
+  res.render('pages/Signup', {...data});
+})
+
+// SIGN IN
+router.get('/signin', (req, res) => {
+  const data = {
+    title: "Sign In"
+  }
+  res.render('pages/Signin', {...data});
+})
+
 // REST OF PAGE (Not Found)
 router.get('*', (req, res) => {
   const data = {
