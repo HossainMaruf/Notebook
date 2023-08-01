@@ -6,24 +6,39 @@ const app = express();
 
 
 // Set the views directory
-app.set('views', './views');
+app.set('views', 'views');
 // set the view engine
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.render('Home');
+  const data = {
+    title: "Home",
+  }
+  res.render('pages/Home', {...data});
 })
 app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'About.html'));
+  const data = {
+    title: "About"
+  }
+  res.render('pages/About', {...data});
 })
 app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'Contact.html'));
+  const data = {
+    title: "Contact"
+  }
+  res.render('pages/Contact', {...data});
 })
 app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'Dashboard.html'));
+  const data = {
+    title: "Dashboard"
+  }
+  res.render('pages/Dashboard', {...data});
 })
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', '404.html'));
+  const data = {
+    title: "Not Found!!!"
+  }
+  res.render('pages/404', {...data});
 })
 
 const port = process.env.PORT || 3000;
