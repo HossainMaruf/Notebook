@@ -1,0 +1,10 @@
+### Registration of a user
+POST http://localhost:8080/signup
+Content-Type: application/json
+
+{
+  "username": "Maruf",
+  "email": "maruficepustian@gmail.com",
+  "password": "123",
+  "confirmPassword": "123"
+}
