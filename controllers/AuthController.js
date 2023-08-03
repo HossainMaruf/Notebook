@@ -18,6 +18,7 @@ router.post('/signup', (req, res) => {
   if(count > 0) {
     res.render("pages/Signup", {...data});
   } else {
+    // save the user info to Database
     res.send("No Errors");
   }
 })

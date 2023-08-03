@@ -3,6 +3,8 @@ const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser')
 
+// Get the Database file
+const {DB} = require('./helpers/Database');
 
 // Load the PagesController
 const pagesController = require('./controllers/PagesController');
@@ -33,7 +35,8 @@ app.use('/', pagesController);
 app.use('/', authController);
 
 
-const port = process.env.PORT || 3000;
+DB.Connect();
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 })

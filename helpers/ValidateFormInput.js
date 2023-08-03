@@ -56,7 +56,7 @@ class Validation {
   		errors.email = "Email is invalid";
   	}
   	if(!this.ValidPassword(data.password)) {
-  		errors.password = "Password must be between 3 to 30 characters";
+  		errors.password = "Password must be between 3 to 15 characters";
   	}
   	return errors;
   }
