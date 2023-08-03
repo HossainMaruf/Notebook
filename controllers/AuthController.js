@@ -40,8 +40,39 @@ router.post('/signup', async (req, res) => {
   }
 })
 
-router.post('/signin', (req, res) => {
-  res.send('Login Data');
+router.post('/signin', async (req, res) => {
+  const errors = Validation.ValidateLogin(req.body);
+  const count = Validation.ErrorCount(errors);
+  const data = {
+    title: "Signin",
+    old: req.body,
+    errors
+  }
+  if(count > 0) {
+    // there are errors in email credentials
+    res.render("pages/Signin", {...data});
+  } else {
+    // no errors
+    try {
+      const user = await User.findOne({email: req.body.email});
+      if(user) {
+        // user found (have an account)
+        if(user.password == req.body.password) {
+          res.render("pages/Home", {title: "Home"});
+        } else {
+          data.errors.password = "Password does not match"; 
+          res.render("pages/Signin", {...data});
+        }
+      } else {
+        // user not found (have no account)
+        data.errors.email = "User does not exist!";
+        res.render("pages/Signin", {...data});
+      }
+    } catch(error) {
+      data.errors.other = "Something went wrong!";
+      res.render('pages/Signin', {...data});
+    }
+  }
 })
 
 

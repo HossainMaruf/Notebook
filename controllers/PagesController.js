@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router();
+// Get the User model
+const User = require("../models/User");
 
 // HOME PAGE
 router.get('/', (req, res) => {
@@ -46,9 +48,21 @@ router.get('/signup', (req, res) => {
 // SIGN IN
 router.get('/signin', (req, res) => {
   const data = {
-    title: "Sign In"
+    title: "Sign In",
+    errors: false,
+    old: false
   }
   res.render('pages/Signin', {...data});
+})
+
+// Users List Page
+router.get('/users', async (req, res) => {
+  const users = await User.find();
+  const data = {
+    title: "Users List",
+    users
+  }
+  res.render("pages/Users", {...data});
 })
 
 // REST OF PAGE (Not Found)
