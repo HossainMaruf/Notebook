@@ -19,7 +19,8 @@ const app = express();
 app.set('views', 'views');
 // set the view engine
 app.set('view engine', 'ejs');
-
+// setting the static folder
+app.use(express.static('public'))
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
