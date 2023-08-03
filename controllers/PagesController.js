@@ -36,7 +36,9 @@ router.get('/dashboard', (req, res) => {
 // SIGN UP
 router.get('/signup', (req, res) => {
   const data = {
-    title: "Sign Up"
+    title: "Sign Up",
+    errors: false, 
+    old: false
   }
   res.render('pages/Signup', {...data});
 })

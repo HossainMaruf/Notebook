@@ -1,10 +1,25 @@
 const express = require('express')
 const router = express.Router();
+// get the validation class
+const {Validation} = require('../helpers/ValidateFormInput');
 
 
 // POST THE SIGN UP DATA
 router.post('/signup', (req, res) => {
-  res.send(req.body);
+  const errors = Validation.ValidateRegistration(req.body);
+  const count = Validation.ErrorCount(errors);
+
+  const data = {
+    title: "Signup",
+    old: req.body,
+    errors
+  }
+
+  if(count > 0) {
+    res.render("pages/Signup", {...data});
+  } else {
+    res.send("No Errors");
+  }
 })
 
 router.post('/signin', (req, res) => {
